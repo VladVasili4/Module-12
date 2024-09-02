@@ -43,6 +43,6 @@ class RunnerTest(unittest.TestCase):
 
 
 if __name__ == "__main__":
-  unittest.main()
-test1 = RunnerTest.test_walk
+    unittest.main()
+    test1 = RunnerTest.test_walk
 
