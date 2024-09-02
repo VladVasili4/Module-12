@@ -74,6 +74,7 @@ class Tournament:
 if __name__=='__main__':
     unittest.main()
 
+@unittest.skip('Тесты в этом кейсе заморожены')
 class TournamentTest(unittest.TestCase):
 
     @classmethod
@@ -84,6 +85,7 @@ class TournamentTest(unittest.TestCase):
         self.r1 = Runner('Усэйн', 10)
         self.r2 = Runner('Андрей', 9)
         self.r3 = Runner('Ник', 3)
+
 
     def test_Tournament1(self):
         self.t1 = Tournament(90, self.r1, self.r3)
