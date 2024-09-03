@@ -12,12 +12,9 @@ class Runner:
             self.speed = speed
         else:
             raise ValueError(f'Скорость не может быть отрицательной, сейчас {speed}')
-            # logger2.info('Неверная скорость для Runner')
-
 
     def run(self):
         self.distance += self.speed * 2
-        # logging.info('Runner пробежал')
 
     def walk(self):
         self.distance += self.speed
@@ -34,7 +31,6 @@ class Runner:
         elif isinstance(other, Runner):
             return self.name == other.name
 
-
 class Tournament:
     def __init__(self, distance, *participants):
         self.full_distance = distance
@@ -50,40 +46,41 @@ class Tournament:
                     finishers[place] = participant
                     place += 1
                     self.participants.remove(participant)
-
         return finishers
+
+logging.basicConfig(level=logging.INFO, filemode='w', filename='runner_tests.log', encoding='UTF-8',
+                        format="%(asctime)s | %(levelname)s | %(message)s")
 
 
 if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO, filemode='w', filename='runner_tests.log', encoding='UTF-8',
-                        format="%(asctime)s | %(levelname)s | %(message)s")
     unittest.main()
-
 
 class RunnerTest(unittest.TestCase):
 
     def test_walk(self):
         try:
-            walker = Runner('Вaся', speed=8)
+            walker = Runner('Вaся', speed=-5)
+            self.assertTrue(walker.speed > 0)
+            logging.info('Скорость положительная !!!')
             for i in range(10):
                 walker.walk()
             self.assertEqual(walker.distance, 50)
             logging.info('"test_walk" выполнен успешно')
         except:
-            logging.warning('Что-то не сходится в walk, сумма скоростей не совпадает', exc_info = True)
+            logging.warning("Неверная скорость для Runner!!!", exc_info = True)
 
-    # @unittest.skip
     def test_run(self):
-        runer = Runner('Илья', speed = 10)
         try:
+            runer = Runner(2, speed=10)
+            self.assertTrue(isinstance(runer.name, str))
+            logging.info('Имя бегуна - строка')
             for i in range(10):
                 runer.run()
-            self.assertEqual(runer.distance, 200)
+            self.assertEqual(runer.distance, 100)
             logging.info('"test_run" выполнен успешно')
         except:
-            logging.warning('Что-то не сходится в run, сумма скоростей не совпадает', exc_info = True)#
+            logging.warning('Неверный тип данных для объекта Runner', exc_info=True)
 
-    # @unittest.skip
     def test_challenge (self):
         walker1 = Runner('Fedor')
         walker2 = Runner('Egor')
